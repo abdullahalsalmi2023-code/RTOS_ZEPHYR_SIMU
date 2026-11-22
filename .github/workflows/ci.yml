@@ -1,0 +1,22 @@
+name: ci
+on: [push, pull_request]
+
+jobs:
+  native-sim:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: sensor-node
+      - name: Host dependencies
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends cmake ninja-build gperf device-tree-compiler gcc
+      - name: West workspace
+        run: |
+          pip install west
+          west init -l sensor-node
+          west update --narrow -o=--depth=1
+          pip install -r zephyr/scripts/requirements-base.txt
+      - name: Build and test
+        run: sensor-node/scripts/build_and_test.sh
+        env:
+          ZEPHYR_TOOLCHAIN_VARIANT: host

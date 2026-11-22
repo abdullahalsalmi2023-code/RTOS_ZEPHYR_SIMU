@@ -1,0 +1,13 @@
+# Makes this repository a west "application repo" pinned to a specific Zephyr release.
+manifest:
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: v4.2.0
+      import:
+        name-allowlist: []   # native_sim needs no HAL modules; add e.g. hal_nordic for real boards
+  self:
+    path: sensor-node

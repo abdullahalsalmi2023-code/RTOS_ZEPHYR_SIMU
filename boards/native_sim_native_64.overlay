@@ -1,0 +1,22 @@
+/*
+ * Virtual sensor node: three real Zephyr sensor drivers talk over the emulated
+ * I2C controller (i2c0) to emulated chips. Same driver code would run on hardware.
+ */
+&i2c0 {
+	status = "okay";
+
+	temp0: f75303@4d {
+		compatible = "fintek,f75303";
+		reg = <0x4d>;
+	};
+
+	imu0: bmi160@68 {
+		compatible = "bosch,bmi160";
+		reg = <0x68>;
+	};
+
+	mag0: akm09918c@c {
+		compatible = "asahi-kasei,akm09918c";
+		reg = <0x0c>;
+	};
+};

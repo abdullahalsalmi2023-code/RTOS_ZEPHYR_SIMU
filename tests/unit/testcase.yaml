@@ -1,0 +1,5 @@
+tests:
+  sensor_node.unit:
+    platform_allow:
+      - native_sim
+    tags: unit
